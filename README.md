@@ -24,7 +24,7 @@ Dalam pembuatan aplikasi ini, kami menggunakan framework [flutter](https://flutt
 
 ```
 $ git clone https://github.com/muhammadgimnastiar/car-rental-flutter.git car-rental-flutter
-$ cd flutter-laundry-app
+$ cd car-rental-flutter
 $ flutter pub get
 $ flutter run
 $ code .
