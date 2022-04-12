@@ -23,7 +23,7 @@ Dalam pembuatan aplikasi ini, kami menggunakan framework [flutter](https://flutt
 ## Instalation and Configuration
 
 ```
-$ git clone https://github.com/muhammadgimnastiar/rijix-shoes-laundy-app.git flutter-laundry-app
+$ git clone https://github.com/muhammadgimnastiar/car-rental-flutter.git car-rental-flutter
 $ cd flutter-laundry-app
 $ flutter pub get
 $ flutter run
