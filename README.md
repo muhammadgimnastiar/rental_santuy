@@ -2,15 +2,42 @@
 
 A new Flutter project.
 
-## Getting Started
+# Rijix Shoes Laundy App with flutter
 
-This project is a starting point for a Flutter application.
+## Deskripsi
+Rijix Shoes Laundry adalah bisnis yang bergerak jasa perantara rental mobil secara online lewat aplikasi berbasis mobile.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Features
+#### Framework
+Dalam pembuatan aplikasi ini, kami menggunakan framework [flutter](https://flutter.dev/) berbasis bahasa pemprograman dart.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p style="float: left;">
+  <img src="https://github.com/muhammadgimnastiar/car-rental-flutter/blob/master/screenshoot/home.png" width="30%" />
+  <img src="https://github.com/muhammadgimnastiar/car-rental-flutter/blob/master/screenshoot/detail.png" width="30%" />
+  <img src="https://github.com/muhammadgimnastiar/car-rental-flutter/blob/master/screenshoot/detail2.png" width="30%" />
+  
+</p>
+
+
+## Instalation and Configuration
+
+```
+$ git clone https://github.com/muhammadgimnastiar/rijix-shoes-laundy-app.git flutter-laundry-app
+$ cd flutter-laundry-app
+$ flutter pub get
+$ flutter run
+$ code .
+```
+
+## Copyright
+Made by Gimnas &copy; 2022
+* Pemrograman Web
+* Car Rental Flutter<br>
+  *	Muhammad Gimnastiar 		(202010370311041)<br>
+* Universitas Muhammadiyah Malang
+
+
+
+
+
