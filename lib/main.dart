@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const Login(),
         "/kendaraan": (context) => const Kendaraan(),
       },
-      home: Kendaraan(),
+      home: Login(),
     );
   }
 }
