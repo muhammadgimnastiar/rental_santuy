@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/card.dart';
+import 'package:rental_santuy/controller/login_controller.dart' as login;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Kendaraan extends StatefulWidget {
   const Kendaraan({Key? key}) : super(key: key);
@@ -24,9 +26,16 @@ class _KendaraanState extends State<Kendaraan> {
           ),
           title: Center(child: TextLarge(title)),
           actions: [
-            Image.asset(
-              'lib/assets/avatars/Avatar.png',
-              width: 32,
+            InkWell(
+              onTap: (() async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('isLogin');
+                Navigator.popAndPushNamed(context, '/');
+              }),
+              child: Image.asset(
+                'lib/assets/avatars/Avatar.png',
+                width: 32,
+              ),
             ),
             const SizedBox(
               width: 24,
@@ -34,31 +43,42 @@ class _KendaraanState extends State<Kendaraan> {
           ],
         ),
         body: SingleChildScrollView(
-          physics:const BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
-            children: const [
-              SizedBox(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
                 height: 24,
               ),
-              CardRental(
+              Padding(
+                padding: EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TextMedium("Hello,"),
+                    TextLarge(login.login.nama!),
+                  ],
+                ),
+              ),
+              const CardRental(
                 "President car",
                 750,
                 image: "lib/assets/kendaraan/pintuTiga.png",
                 color: MyColors.cokelatSld,
               ),
-              CardRental(
+              const CardRental(
                 "Sedan",
                 200,
                 color: MyColors.greySld,
                 image: "lib/assets/kendaraan/sedan.png",
               ),
-              CardRental(
+              const CardRental(
                 "Taxi",
                 250,
                 image: "lib/assets/kendaraan/taxi.png",
                 color: MyColors.orangeSld,
               ),
-              CardRental(
+              const CardRental(
                 "Electric Car",
                 300,
                 image: "lib/assets/kendaraan/electric.png",
