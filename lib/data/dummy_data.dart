@@ -15,7 +15,7 @@ class DummyData {
       "password": "pass2",
     },
     {
-      "id":3,
+      "id": 3,
       "nama": "DEVANIS DWI SUTRISNO",
       "Nim": "201910370311078",
       "username": "user3",
@@ -43,7 +43,7 @@ class DummyData {
       "password": "pass6",
     },
     {
-      "id":7,
+      "id": 7,
       "nama": "NUR SYAHFEI",
       "Nim": "201910370311109",
       "username": "user7",
