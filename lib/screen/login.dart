@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/controller/login_controller.dart';
 import 'package:rental_santuy/screen/cars.dart';
@@ -16,6 +18,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: TextLarge("Rental Santuy")),
@@ -23,33 +28,48 @@ class _LoginState extends State<Login> {
         elevation: 0,
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              SizedBox(
-                height: 32,
-              ),
-              TextLargeBold("All in one"),
-              TextMedium("Find your favorite car, all in one place"),
-            ],
-          ),
-          Image.asset("lib/assets/kendaraan/intro.png"),
-          Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: ButtonRent(
+          child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
+          children: [
+            TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  hintText: "Username",
+                  prefixIcon: Icon(Icons.person),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                )),
+            TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  hintText: "Username",
+                  prefixIcon: Icon(Icons.person),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                )),
+            Spacer(),
+            ButtonRent(
               onTap: () {
-                login.login.auth("user14", "pass14");
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Kendaraan()));
+                if (login.login
+                    .auth(usernameController.text, passwordController.text)) {
+                  print("Control user input: ${usernameController.text}");
+
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => Kendaraan()));
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                            title: TextLarge("Salah"),
+                          ));
+                }
               },
               text: "Login",
               textColor: Colors.white,
             ),
-          ),
-        ],
+          ],
+        ),
       )),
     );
   }

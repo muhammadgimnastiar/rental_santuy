@@ -15,6 +15,21 @@ class Kendaraan extends StatefulWidget {
 class _KendaraanState extends State<Kendaraan> {
   String title = "Cars";
   bool isFavorite = true;
+  String? nama = "";
+
+  void getNamaFromLocal() async {
+    final pref = await SharedPreferences.getInstance();
+    nama = pref.getString('nama');
+    print("Getnama from widget cars ${pref.getString('nama')}");
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getNamaFromLocal();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +44,8 @@ class _KendaraanState extends State<Kendaraan> {
             InkWell(
               onTap: (() async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('isLogin');
-                Navigator.popAndPushNamed(context, '/');
+                prefs.clear();
+                Navigator.popAndPushNamed(context, "/");
               }),
               child: Image.asset(
                 'lib/assets/avatars/Avatar.png',
@@ -56,7 +71,7 @@ class _KendaraanState extends State<Kendaraan> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TextMedium("Hello,"),
-                    TextLarge(login.login.nama!),
+                    TextLarge(login.login.nama.toString()),
                   ],
                 ),
               ),

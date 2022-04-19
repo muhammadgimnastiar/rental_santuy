@@ -98,7 +98,7 @@ class _CardRentalState extends State<CardRental> {
                       onTap: () {
                         isFavorite = !isFavorite;
                         saveToLocal();
-                        print(DummyData.data[1]['username']);
+
                         setState(() {});
                       },
                       child: Icon(
