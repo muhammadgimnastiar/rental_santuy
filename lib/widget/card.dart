@@ -9,7 +9,8 @@ import '../style/text.dart';
 class CardRental extends StatefulWidget {
   const CardRental(
     this.type,
-    this.harga, {
+    this.harga,
+    this.sharedPrefs, {
     this.color = MyColors.blueSld,
     this.image = "",
     this.uid = 0,
@@ -21,6 +22,7 @@ class CardRental extends StatefulWidget {
   final String image;
   final int harga;
   final int uid;
+  final SharedPreferences sharedPrefs;
 
   @override
   State<CardRental> createState() => _CardRentalState();
@@ -29,13 +31,11 @@ class CardRental extends StatefulWidget {
 class _CardRentalState extends State<CardRental> {
   bool isFavorite = false;
   saveToLocal() async {
-    final pref = await SharedPreferences.getInstance();
-    await pref.setBool('isFavorite${widget.uid}', isFavorite);
+    await widget.sharedPrefs.setBool('isFavorite${widget.uid}', isFavorite);
   }
 
   getLocalFavorite() async {
-    final pref = await SharedPreferences.getInstance();
-    isFavorite = pref.getBool('isFavorite${widget.uid}') ?? false;
+    isFavorite = widget.sharedPrefs.getBool('isFavorite${widget.uid}') ?? false;
   }
 
   @override
@@ -98,7 +98,6 @@ class _CardRentalState extends State<CardRental> {
                       onTap: () {
                         isFavorite = !isFavorite;
                         saveToLocal();
-
                         setState(() {});
                       },
                       child: Icon(
