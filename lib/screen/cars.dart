@@ -69,7 +69,7 @@ class _KendaraanState extends State<Kendaraan> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const TextMedium("Hello,"),
-                  TextLarge(nama == 'null' ? Login.nama : nama),
+                  TextLarge(nama),
                 ],
               ),
             ),
