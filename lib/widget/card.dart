@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:rental_santuy/data/dummy_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../screen/detail_n_order.dart';
+import '../screen/detail.dart';
 import '../style/colors.dart';
 import '../style/text.dart';
 
 class CardRental extends StatefulWidget {
   const CardRental(
     this.type,
-    this.harga, {
+    this.harga,
+    this.sharedPrefs, {
     this.color = MyColors.blueSld,
     this.image = "",
+    this.uid = 0,
     Key? key,
   }) : super(key: key);
 
@@ -17,6 +21,8 @@ class CardRental extends StatefulWidget {
   final Color color;
   final String image;
   final int harga;
+  final int uid;
+  final SharedPreferences sharedPrefs;
 
   @override
   State<CardRental> createState() => _CardRentalState();
@@ -24,6 +30,20 @@ class CardRental extends StatefulWidget {
 
 class _CardRentalState extends State<CardRental> {
   bool isFavorite = false;
+  saveToLocal() async {
+    await widget.sharedPrefs.setBool('isFavorite${widget.uid}', isFavorite);
+  }
+
+  getLocalFavorite() async {
+    isFavorite = widget.sharedPrefs.getBool('isFavorite${widget.uid}') ?? false;
+  }
+
+  @override
+  void initState() {
+    getLocalFavorite();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -76,9 +96,9 @@ class _CardRentalState extends State<CardRental> {
                     ),
                     InkWell(
                       onTap: () {
-                        setState(() {
-                          isFavorite = !isFavorite;
-                        });
+                        isFavorite = !isFavorite;
+                        saveToLocal();
+                        setState(() {});
                       },
                       child: Icon(
                         (isFavorite ? Icons.star : Icons.star_border),

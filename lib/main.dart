@@ -1,45 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/cars.dart';
+import 'package:rental_santuy/screen/login.dart';
+import 'package:rental_santuy/controller/login_controller.dart' as login;
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+  runApp(MyApp(sharedPrefs));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final SharedPreferences sharedPrefs;
+  const MyApp(this.sharedPrefs, {Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    bool isLogin = sharedPrefs.getBool(Keys.login) ?? false;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rental',
-      initialRoute: '/',
+      initialRoute: isLogin == false ? '/' : '/kendaraan',
       routes: {
-        "/homescreen": (_) => const HomePage(),
-        "/kendaraan": (_) => const Kendaraan(),
+        "/": (context) => Login(sharedPrefs),
+        "/kendaraan": (context) => Kendaraan(sharedPrefs),
       },
-      home: const Kendaraan(),
-    );
-  }
-}
-
-
-
-
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: InkWell(),
     );
   }
 }

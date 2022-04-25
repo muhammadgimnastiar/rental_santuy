@@ -8,10 +8,10 @@ class MyColors {
   static const Color info = Color(0xFF91D7E0);
   static const Color active = Color(0xFF1814E4);
   static const Color warning = Color(0xFFFFAC4B);
-  static const Color danger = Color(0xFFFF5A5A);
+  static const Color danger = Color(0xFFFA7F35);
 
   static const Color orange = Color(0xFFF5D4C1);
-  static const Color yellow = Color(0xFDEBC9);
+  static const Color yellow = Color(0xFFFDEBC9);
   static const Color green = Color(0xFFECF0C0);
   static const Color blue = Color(0xFFE1FFED);
   static const Color purple = Color(0xFFDED2F9);

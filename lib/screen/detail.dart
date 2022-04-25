@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/style/colors.dart';
+import 'package:rental_santuy/widget/button.dart';
 
 import '../style/text.dart';
 
@@ -105,7 +106,9 @@ class _DetailState extends State<Detail> {
                         )
                       ],
                     ),
-                    InkWell(
+                    ButtonRent(
+                      text: (!isPesan) ? "Pesan" : "Batal",
+                      color: (!isPesan) ? Colors.white : MyColors.danger,
                       onTap: () {
                         setState(() {
                           if (isPesan == false) {
@@ -115,19 +118,7 @@ class _DetailState extends State<Detail> {
                           isPesan = !isPesan;
                         });
                       },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        decoration: BoxDecoration(
-                            color: (!isPesan) ? Colors.white : MyColors.danger,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextLargeBold((!isPesan) ? "Pesan" : "Batal"),
-                          ],
-                        ),
-                      ),
-                    )
+                    ),
                   ],
                 ),
               ),
