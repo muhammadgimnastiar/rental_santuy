@@ -16,13 +16,11 @@ class LoginController {
   void saveToLocal(Map<String, dynamic> dataLogin, bool isLogin) async {
     this.dataLogin = dataLogin;
     final pref = await SharedPreferences.getInstance();
-    pref.clear();
     await pref.setString('username', dataLogin['username']);
     await pref.setString('nama', dataLogin['nama']);
     await pref.setString('nim', dataLogin['Nim']);
     await pref.setBool('isLogin', isLogin);
     getDataFromLocal();
-    print("Data disimpan ${isLogin} ${nama} ${username}");
   }
 
   void getDataFromLocal() async {
@@ -33,12 +31,25 @@ class LoginController {
     nim = pref.getString('nim');
   }
 
+  static saveToLocalShared(Map<String, dynamic> dataLogin, bool isLogin) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.setString('username', dataLogin['username']);
+    await pref.setString('nama', dataLogin['nama']);
+    await pref.setString('nim', dataLogin['Nim']);
+    await pref.setBool('isLogin', isLogin);
+  }
+
+  static getNamaFromLocalShared() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getString('nama');
+  }
+
   bool auth(String username, String password) {
     for (int i = 0; i < DummyData.data.length; i++) {
       if (username == DummyData.data[i]['username']) {
         if (password == DummyData.data[i]['password']) {
           saveToLocal(DummyData.data[i], true);
-          return true;
+          return isLogin = true;
         }
       }
     }
@@ -57,6 +68,10 @@ class LoginController {
 
   void setDataLogin(Map<String, dynamic> dataLogin) {
     this.dataLogin = dataLogin;
+  }
+
+  String getNama() {
+    return nama ?? "";
   }
 
   @override
