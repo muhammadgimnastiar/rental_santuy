@@ -3,15 +3,16 @@ import 'package:rental_santuy/screen/cars.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Intro extends StatefulWidget {
+  const Intro({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Intro> createState() => _IntroState();
 }
 
-class _LoginState extends State<Login> {
+class _IntroState extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +39,7 @@ class _LoginState extends State<Login> {
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: ButtonRent(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Kendaraan()));
-              },
+              onTap: () {},
               text: "Login",
               textColor: Colors.white,
             ),
