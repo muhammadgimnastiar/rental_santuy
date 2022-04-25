@@ -105,5 +105,12 @@ class DummyData {
       "username": "user15",
       "password": "pass15",
     },
+    {
+      "id": 16,
+      "nama": "Muhammad Gimnasitar",
+      "Nim": "201910370311385",
+      "username": "1",
+      "password": "1",
+    },
   ];
 }
