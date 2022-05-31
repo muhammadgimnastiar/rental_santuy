@@ -1,55 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:rental_santuy/data/keys.dart';
-import 'package:rental_santuy/screen/login.dart';
+import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/Icon.dart';
-import 'package:rental_santuy/widget/custom_paint.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rental_santuy/screen/mainpage.dart' as user;
 
 class HomePage extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  const HomePage(
+  HomePage(
     this.sharedPrefs, {
     Key? key,
   }) : super(key: key);
+  late CurrentUser user = CurrentUser(sharedPrefs);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  String nama = "";
-  String nim = "";
-  String username = "";
-  String firstnama = "";
-
-  void getNamaFromLocal() async {
-    nama = widget.sharedPrefs.getString(Keys.nama) ?? Login.nama;
-    nim = widget.sharedPrefs.getString(Keys.nim) ?? Login.nim;
-    username = widget.sharedPrefs.getString(Keys.username) ?? Login.username;
-
-    setState(() {});
-  }
-
-  String getFirstWord(String inputString) {
-    List<String> wordList = inputString.split(" ");
-    if (wordList.isNotEmpty) {
-      return wordList[wordList.length - 1];
-    } else {
-      return ' ';
-    }
-  }
-
   @override
   void initState() {
-    getNamaFromLocal();
+    widget.user.getDataFromLocal();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    firstnama = getFirstWord(nama);
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: SingleChildScrollView(
@@ -65,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextLargeBold(
-                        "Hi, $nama",
+                        "Hi, ${widget.user.nama}",
                         size: 24,
                         spacing: 2,
                       ),

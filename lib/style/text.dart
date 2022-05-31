@@ -20,16 +20,19 @@ class Header extends StatelessWidget {
 }
 
 class TextLarge extends StatelessWidget {
-  const TextLarge(this.text, {this.color = Colors.black, Key? key})
+  const TextLarge(this.text,
+      {this.color = Colors.black, this.maxLines = 1, Key? key})
       : super(key: key);
 
   final String text;
   final Color color;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: maxLines,
       style: GoogleFonts.poppins(
         color: color,
         fontSize: 20,

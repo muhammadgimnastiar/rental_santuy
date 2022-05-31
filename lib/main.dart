@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/bicycles.dart';
 import 'package:rental_santuy/screen/cars.dart';
@@ -15,7 +16,8 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final SharedPreferences sharedPrefs;
-  const MyApp(this.sharedPrefs, {Key? key}) : super(key: key);
+  MyApp(this.sharedPrefs, {Key? key}) : super(key: key);
+  late CurrentUser user = CurrentUser(sharedPrefs);
 
   // This widget is the root of your application.
   @override
