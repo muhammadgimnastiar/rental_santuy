@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/data/vehicle_data.dart' as vehicles;
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/login.dart';
@@ -11,7 +12,8 @@ import '../widget/modal.dart';
 
 class Motors extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  const Motors(this.sharedPrefs, {Key? key}) : super(key: key);
+  Motors(this.sharedPrefs, {Key? key}) : super(key: key);
+  late CurrentUser user = CurrentUser(sharedPrefs);
 
   @override
   State<Motors> createState() => _MotorsState();
@@ -19,22 +21,10 @@ class Motors extends StatefulWidget {
 
 class _MotorsState extends State<Motors> {
   String title = "Cars";
-  bool isFavorite = true;
-  String nama = "";
-  String nim = "";
-  String username = "";
-
-  void getNamaFromLocal() async {
-    nama = widget.sharedPrefs.getString(Keys.nama) ?? Login.nama;
-    nim = widget.sharedPrefs.getString(Keys.nim) ?? Login.nim;
-    username = widget.sharedPrefs.getString(Keys.username) ?? Login.username;
-
-    setState(() {});
-  }
 
   @override
   void initState() {
-    getNamaFromLocal();
+    widget.user.getDataFromLocal();
     super.initState();
   }
 
@@ -59,9 +49,9 @@ class _MotorsState extends State<Motors> {
               showFloatingModalBottomSheet(
                 context: context,
                 builder: (context) => ModalFit(
-                  nama: nama,
-                  nim: nim,
-                  username: username,
+                  nama: widget.user.nama,
+                  nim: widget.user.nim,
+                  username: widget.user.username,
                   sharedPrefs: widget.sharedPrefs,
                 ),
               );
