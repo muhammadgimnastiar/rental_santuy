@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rental_santuy/data/vehicle_data.dart' as vehicles;
+import 'package:rental_santuy/data/vehicle_data.dart' as vehicle;
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/login.dart';
 import 'package:rental_santuy/style/colors.dart';
@@ -9,16 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/modal.dart';
 
-class Cars extends StatefulWidget {
+class Bicycles extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  const Cars(this.sharedPrefs, {Key? key}) : super(key: key);
+  const Bicycles(this.sharedPrefs, {Key? key}) : super(key: key);
 
   @override
-  State<Cars> createState() => _CarsState();
+  State<Bicycles> createState() => _BicyclesState();
 }
 
-class _CarsState extends State<Cars> {
-  String title = "Cars";
+class _BicyclesState extends State<Bicycles> {
+  String title = "Bicycles";
   bool isFavorite = true;
   String nama = "";
   String nim = "";
@@ -38,7 +38,7 @@ class _CarsState extends State<Cars> {
     super.initState();
   }
 
-  List<Map<String, dynamic>> carsList = vehicles.VehicleData.Cars;
+  List<Map<String, dynamic>> carsList = vehicle.VehicleData.Bicycles;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
