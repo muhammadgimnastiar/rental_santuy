@@ -18,6 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.3.1
   shared_preferences: ^2.0.13
+  modal_bottom_sheet: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -29,4 +30,6 @@ flutter:
   assets:
     - lib/assets/kendaraan/
     - lib/assets/avatars/
+    - lib/assets/banner/
+
 
