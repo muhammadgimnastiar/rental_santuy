@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/cars.dart';
@@ -9,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rental_santuy/data/dummy_data.dart';
 
 class Login extends StatefulWidget {
-  static String nama = "";
+  static String nama = "", nim = "", username = "";
   final SharedPreferences sharedPrefs;
   const Login(this.sharedPrefs, {Key? key}) : super(key: key);
 
@@ -28,13 +27,14 @@ class _LoginState extends State<Login> {
         .setString(Keys.username, dataFound[Keys.username] ?? "");
     await widget.sharedPrefs.setString(Keys.nama, dataFound[Keys.nama] ?? "");
     getDataFromLocal();
+    await widget.sharedPrefs.setString(Keys.nim, dataFound[Keys.nim] ?? "");
+    getDataFromLocal();
   }
 
   void getDataFromLocal() async {
     isLogin = widget.sharedPrefs.getBool(Keys.login);
     usernameData = widget.sharedPrefs.getString(Keys.username);
     namaData = widget.sharedPrefs.getString(Keys.nama);
-    print("get nama: ${namaData}");
     setState(() {});
   }
 
@@ -44,8 +44,9 @@ class _LoginState extends State<Login> {
         if (passwordInput == DummyData.data[i]['password']) {
           saveToLocal(DummyData.data[i], true);
           Login.nama = DummyData.data[i][Keys.nama];
-          // setGlobalNama(DummyData.data[i][Keys.nama]);
-          print("Data found ${DummyData.data[i][Keys.nama]} ${namaData}");
+          Login.nim = DummyData.data[i][Keys.nim];
+          Login.username = DummyData.data[i][Keys.username];
+
           return isLogin = true;
         }
       }
@@ -60,15 +61,25 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: TextLarge("Rental Santuy")),
+        title: TextLarge("Rental Santuy"),
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
       ),
       body: Center(
           child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(
           children: [
+            Image.asset(
+              'lib/assets/kendaraan/intro.png',
+              height: 150,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
+            const Divider(
+              height: 30,
+            ),
             TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
@@ -83,7 +94,7 @@ class _LoginState extends State<Login> {
             TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
-                  hintText: "Username",
+                  hintText: "Password",
                   prefixIcon: Icon(Icons.lock),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
@@ -96,7 +107,7 @@ class _LoginState extends State<Login> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => Kendaraan(widget.sharedPrefs),
+                        builder: (_) => MainPage(widget.sharedPrefs),
                       ));
                 } else {
                   showDialog(
