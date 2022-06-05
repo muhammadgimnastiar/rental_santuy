@@ -23,6 +23,15 @@ initializeNotification() async {
       FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
       FirebaseMessaging.onMessageOpenedApp.listen(_onOpened);
       debugPrint("Token: ${(fcm.getToken()).toString()}");
+
+      final messange = fcm.getInitialMessage();
+
+      messange.then((value) {
+        if (value != null) {
+          debugPrint(value.notification?.title);
+          debugPrint(value.notification?.body);
+        }
+      });
     }
   } catch (e) {
     debugPrint(e.toString());
