@@ -14,11 +14,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
   cupertino_icons: ^1.0.2
   google_fonts: ^2.3.1
   shared_preferences: ^2.0.13
   modal_bottom_sheet: ^2.0.1
+  firebase_core: ^1.17.1
+  firebase_auth: ^3.3.7
+  google_sign_in: ^5.3.2
+  font_awesome_flutter: ^9.0.0
+  provider: ^6.0.3
+  equatable: ^2.0.3
+  flutter_bloc: ^8.0.1
+  firebase_messaging: ^11.4.1
 
 dev_dependencies:
   flutter_test:

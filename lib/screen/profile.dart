@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/data/vehicle_data.dart' as vehicle;
-import 'package:rental_santuy/style/colors.dart';
+import 'package:rental_santuy/main.dart';
 import 'package:rental_santuy/style/text.dart';
-import 'package:rental_santuy/widget/card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/modal.dart';
@@ -27,6 +27,15 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
+  void logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pop();
+
+    widget.sharedPrefs.clear();
+    Navigator.popAndPushNamed(context, "/");
+    main();
+  }
+
   List<Map<String, dynamic>> carsList = vehicle.VehicleData.Bicycles;
   @override
   Widget build(BuildContext context) {
@@ -35,8 +44,8 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Center(child: TextLarge(title)),
-        actions: [
-          const SizedBox(
+        actions: const [
+          SizedBox(
             width: 24,
           )
         ],
@@ -96,8 +105,8 @@ class _ProfileState extends State<Profile> {
                   height: 16,
                 ),
                 ListTile(
-                  leading: Icon(Icons.link),
-                  title: TextLargeBold(
+                  leading: const Icon(Icons.link),
+                  title: const TextLargeBold(
                     "Atur Akun",
                   ),
                   onTap: (() async {
@@ -108,6 +117,9 @@ class _ProfileState extends State<Profile> {
                         nim: widget.user.nim,
                         username: widget.user.username,
                         sharedPrefs: widget.sharedPrefs,
+                        onTap: () {
+                          logout();
+                        },
                       ),
                     );
                   }),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/style/colors.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    User? _user = FirebaseAuth.instance.currentUser;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: SingleChildScrollView(
@@ -132,51 +134,6 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 24,
             ),
-            // Card(
-            //   shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(50.0)),
-            //   elevation: 10.0,
-            //   child: Container(
-            //     width: 300.0,
-            //     height: 400.0,
-            //     child: Stack(
-            //       alignment: Alignment.bottomCenter,
-            //       children: [
-            //         // This will hold the Image in the back ground:
-            //         Container(
-            //           decoration: BoxDecoration(
-            //               borderRadius: BorderRadius.circular(50.0),
-            //               color: Colors.pink[100]),
-            //         ),
-            //         // This is the Custom Shape Container
-            //         Positioned(
-            //           bottom: 0.0,
-            //           left: 0.0,
-            //           child: Container(
-            //             color: Colors.blue,
-            //             child: CustomPaint(
-            //               painter: CustomContainerShapeBorder(
-            //                 height: 200.0,
-            //                 width: 300.0,
-            //                 radius: 50.0,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         // This Holds the Widgets Inside the the custom Container;
-            //         Positioned(
-            //           bottom: 10.0,
-            //           child: Container(
-            //             height: 80.0,
-            //             width: 260.0,
-            //             color: Colors.grey.withOpacity(0.6),
-            //             child: null,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
 
             RecommendedCard(width: width),
             RecommendedCard(width: width)
@@ -218,11 +175,11 @@ class RecommendedCard extends StatelessWidget {
                       bottomRight: radius,
                       topLeft: radius2,
                       bottomLeft: radius2),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage('lib/assets/banner/rent.jpeg'))),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Flexible(

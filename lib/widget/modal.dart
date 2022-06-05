@@ -49,12 +49,14 @@ class ModalFit extends StatelessWidget {
       required this.nim,
       required this.username,
       required this.sharedPrefs,
+      this.onTap,
       Key? key})
       : super(key: key);
   final String nama;
   final String nim;
   final String username;
   final SharedPreferences sharedPrefs;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -74,19 +76,13 @@ class ModalFit extends StatelessWidget {
               color: Colors.black,
             ),
             ListTile(
-              title: const Text('Logout'),
-              leading: const Icon(
-                Icons.logout_outlined,
-                color: Colors.redAccent,
-              ),
-              // ignore: void_checks
-              onTap: () async {
-                Navigator.of(context).pop();
-                sharedPrefs.clear();
-                Navigator.popAndPushNamed(context, "/");
-                main();
-              },
-            ),
+                title: const Text('Logout'),
+                leading: const Icon(
+                  Icons.logout_outlined,
+                  color: Colors.redAccent,
+                ),
+                // ignore: void_checks
+                onTap: onTap),
           ],
         ),
       ),

@@ -61,7 +61,7 @@ class TextLargeBold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.clip,
       maxLines: maxLines,
       style: GoogleFonts.poppins(
           color: color,
@@ -74,19 +74,26 @@ class TextLargeBold extends StatelessWidget {
 
 class TextMedium extends StatelessWidget {
   const TextMedium(this.text,
-      {this.color = Colors.black, this.fontSize = 16, Key? key})
+      {this.color = Colors.black,
+      this.fontSize = 16,
+      this.decoration = TextDecoration.none,
+      Key? key})
       : super(key: key);
 
   final String text;
   final Color color;
   final double fontSize;
+  final TextDecoration decoration;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: GoogleFonts.poppins(
-          color: color, fontSize: fontSize, fontWeight: FontWeight.normal),
+          color: color,
+          fontSize: fontSize,
+          fontWeight: FontWeight.normal,
+          decoration: decoration),
     );
   }
 }

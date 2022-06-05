@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "459443760553",
+    "project_id": "santuy-project-flutter",
+    "storage_bucket": "santuy-project-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459443760553:android:c8ca21f265f0e001ed28b8",
+        "android_client_info": {
+          "package_name": "com.example.rental_santuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459443760553-8kr146g4nfnhqtq9m1bu9tbkcs48g4d7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVxgUzlOIumQGD_6OOG2zLOCJ0reRyc8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459443760553-8kr146g4nfnhqtq9m1bu9tbkcs48g4d7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
