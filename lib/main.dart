@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/firebase_options.dart';
+import 'package:rental_santuy/notification_handler.dart';
 import 'package:rental_santuy/screen/bicycles.dart';
 import 'package:rental_santuy/screen/cars.dart';
 import 'package:rental_santuy/screen/login.dart';
@@ -26,13 +27,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await initializeNotification();
 
   runApp(MyApp(sharedPrefs));
 }
 
 class MyApp extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  MyApp(this.sharedPrefs, {Key? key}) : super(key: key);
+  const MyApp(this.sharedPrefs, {Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
