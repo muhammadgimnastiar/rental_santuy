@@ -52,9 +52,9 @@ class ModalFit extends StatelessWidget {
       this.onTap,
       Key? key})
       : super(key: key);
-  final String nama;
-  final String nim;
-  final String username;
+  final String? nama;
+  final String? nim;
+  final String? username;
   final SharedPreferences sharedPrefs;
   final Function()? onTap;
 
@@ -69,9 +69,9 @@ class ModalFit extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Image.asset('lib/assets/avatars/Avatar.png'),
-            TextLarge(nama),
-            TextMedium(nim),
-            TextMedium(username),
+            TextLarge(nama!),
+            TextMedium(nim!),
+            TextMedium(username!),
             const Divider(
               color: Colors.black,
             ),
@@ -83,6 +83,43 @@ class ModalFit extends StatelessWidget {
                 ),
                 // ignore: void_checks
                 onTap: onTap),
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+class ModalFitNotif extends StatelessWidget {
+  const ModalFitNotif(
+      {required this.nama,
+      required this.nim,
+      required this.username,
+      this.onTap,
+      Key? key})
+      : super(key: key);
+  final String? nama;
+  final String? nim;
+  final String? username;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        child: SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Image.asset('lib/assets/avatars/Avatar.png'),
+            TextLarge(nama!),
+            TextMedium(nim!),
+            TextMedium(username!),
+            const Divider(
+              color: Colors.black,
+            ),
           ],
         ),
       ),
