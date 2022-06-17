@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                   color: MyColors.blueSoft2,
                   label: "Bicycles",
                   onTap: () {
-                    Navigator.pushNamed(context, '/bicycles');
+                    Navigator.pushNamed(context, '/order');
                   },
                 ),
               ],

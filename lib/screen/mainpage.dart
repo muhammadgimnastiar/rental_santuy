@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/main.dart';
-import 'package:rental_santuy/screen/bicycles.dart';
 import 'package:rental_santuy/screen/homepage.dart';
 import 'package:rental_santuy/screen/profile.dart';
 import 'package:rental_santuy/style/colors.dart';
@@ -29,6 +28,7 @@ class _MainPageState extends State<MainPage> {
 
   late List<Widget> screeen = [
     HomePage(widget.sharedPrefs),
+    Profile(widget.sharedPrefs),
     Profile(widget.sharedPrefs)
   ];
 
@@ -39,17 +39,11 @@ class _MainPageState extends State<MainPage> {
         .getInitialMessage()
         .then((RemoteMessage? message) {
       if (message != null) {
-        Navigator.pushNamed(
-          context,
-          '/motors',
-          arguments: message,
-        );
         showFloatingModalBottomSheet(
             context: context,
             builder: (context) => ModalFitNotif(
-                  nama: message.notification?.title,
-                  nim: message.notification?.body,
-                  username: message.notification?.body,
+                  title: message.notification?.title,
+                  body: message.notification?.body,
                 ));
       }
     });
@@ -67,8 +61,6 @@ class _MainPageState extends State<MainPage> {
               channel.id,
               channel.name,
               channelDescription: channel.description,
-              // TODO add a proper drawable resource to android, for now using
-              //      one that already exists in example app.
               icon: 'launch_background',
             ),
           ),
@@ -81,9 +73,11 @@ class _MainPageState extends State<MainPage> {
       showFloatingModalBottomSheet(
           context: context,
           builder: (context) => ModalFitNotif(
-                nama: message.notification?.title,
-                nim: message.notification?.body,
-                username: message.notification?.body,
+                title: message.notification?.title,
+                body: message.notification?.body,
+                onTap: () {
+                  Navigator.pushNamed(context, "/car");
+                },
               ));
     });
   }
@@ -103,6 +97,8 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(Icons.home_mini),
               label: "Home",
             ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.receipt_long), label: "Transaksi"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ]),
     );

@@ -92,15 +92,15 @@ class ModalFit extends StatelessWidget {
 
 class ModalFitNotif extends StatelessWidget {
   const ModalFitNotif(
-      {required this.nama,
-      required this.nim,
-      required this.username,
+      {required this.title,
+      required this.body,
+      this.image,
       this.onTap,
       Key? key})
       : super(key: key);
-  final String? nama;
-  final String? nim;
-  final String? username;
+  final String? title;
+  final String? body;
+  final String? image;
   final Function()? onTap;
 
   @override
@@ -113,13 +113,26 @@ class ModalFitNotif extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.asset('lib/assets/avatars/Avatar.png'),
-            TextLarge(nama!),
-            TextMedium(nim!),
-            TextMedium(username!),
+            Image.asset(image ?? 'lib/assets/avatars/Avatar.png'),
+            const SizedBox(
+              height: 12,
+            ),
+            TextLarge(title!),
+            const SizedBox(
+              height: 12,
+            ),
+            TextMedium(body!),
             const Divider(
               color: Colors.black,
             ),
+            ListTile(
+                title: const Text('Cek Sekarang'),
+                leading: const Icon(
+                  Icons.logout_outlined,
+                  color: Colors.redAccent,
+                ),
+                // ignore: void_checks
+                onTap: onTap),
           ],
         ),
       ),
