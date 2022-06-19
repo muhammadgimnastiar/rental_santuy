@@ -6,6 +6,7 @@ import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/main.dart';
 import 'package:rental_santuy/screen/homepage.dart';
 import 'package:rental_santuy/screen/profile.dart';
+import 'package:rental_santuy/screen/transaksi_history.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/widget/modal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
 
   late List<Widget> screeen = [
     HomePage(widget.sharedPrefs),
-    Profile(widget.sharedPrefs),
+    const TransasksiHistory(),
     Profile(widget.sharedPrefs)
   ];
 

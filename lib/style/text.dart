@@ -49,6 +49,7 @@ class TextLargeBold extends StatelessWidget {
       this.size = 16,
       this.spacing = 1,
       this.maxLines = 1,
+      this.overflow = TextOverflow.clip,
       Key? key})
       : super(key: key);
 
@@ -57,11 +58,12 @@ class TextLargeBold extends StatelessWidget {
   final double size;
   final double spacing;
   final int maxLines;
+  final TextOverflow overflow;
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      overflow: TextOverflow.clip,
+      overflow: overflow,
       maxLines: maxLines,
       style: GoogleFonts.poppins(
           color: color,

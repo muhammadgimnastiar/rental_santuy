@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
 class OrderService extends ChangeNotifier {
-  Map<String, Map<String, dynamic>> vehicle = {
-    'mobil': {'mobil': 20000},
-    'motor': {'motor': 10000},
-    'sepeda': {'sepeda': 5000},
+  int? selectedIndex;
+  String? selectedVehicle = 'mobil';
+  List<Map<String, dynamic>> vehicle = [
+    {'type': 'mobil', 'harga': 20000},
+    {'type': 'motor', 'harga': 10000},
+    {'type': 'sepeda', 'harga': 5000},
+  ];
+
+  Map<String, dynamic> vehicleHarga = {
+    'mobil': 20000,
+    'motor': 10000,
+    'sepeda': 5000,
   };
 
   Map<String, Map<String, dynamic>> add = {
@@ -14,19 +22,60 @@ class OrderService extends ChangeNotifier {
     'washonly': {'washonly': 2000},
   };
 
+  Map<String, String> img = {
+    "mobil": "lib/assets/kendaraan/car.png",
+    "motor": "lib/assets/kendaraan/motor.png",
+    "sepeda": "lib/assets/kendaraan/bicycle.png",
+  };
+
   List<Map<String, dynamic>> transaksi = [
     {
       'id': 1,
       'status': "progress",
-      'vehicle': {'mobil': 20000, 'total': 0},
-      'wash': {'full': 10000},
+      'vehicle': {'type': 'mobil', 'harga': 20000, 'total': 1},
+      'wash': {'type': 'full', 'harga': 10000},
+      'add': [
+        {'': 0}
+      ],
+    },
+    {
+      'id': 2,
+      'status': "selesai",
+      'vehicle': {'type': 'motor', 'harga': 10000, 'total': 1},
+      'wash': {'type': 'full', 'harga': 10000},
+      'add': [
+        {'': 0}
+      ],
+    },
+    {
+      'id': 3,
+      'status': "progress",
+      'vehicle': {'type': 'mobil', 'harga': 20000, 'total': 1},
+      'wash': {'type': 'full', 'harga': 10000},
+      'add': [
+        {'': 0}
+      ],
+    },
+    {
+      'id': 4,
+      'status': "progress",
+      'vehicle': {'type': 'sepeda', 'harga': 5000, 'total': 1},
+      'wash': {'type': 'full', 'harga': 10000},
       'add': [
         {'': 0}
       ],
     }
   ];
 
-  Map<String, dynamic> aTransaksi = {};
+  Map<String, dynamic> aTransaksi = {
+    'id': 0,
+    'status': "",
+    'vehicle': {'type': '', 'harga': 0, 'total': 1},
+    'wash': {'type': 'full wash', 'harga': 10000},
+    'add': [
+      {'': 0}
+    ],
+  };
 
   void createTransaksi(Map<String, dynamic> oneTransaksi) {
     oneTransaksi['id'] = transaksi.length + 1;
@@ -41,6 +90,10 @@ class OrderService extends ChangeNotifier {
 
   void deleteTransaksi(int index) {
     transaksi.removeAt(index);
+    notifyListeners();
+  }
+
+  void refresh() {
     notifyListeners();
   }
 
