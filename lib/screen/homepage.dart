@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_santuy/data/current_user.dart';
+import 'package:rental_santuy/services/order_service.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/Icon.dart';
@@ -95,34 +97,39 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 24,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconCategories(
-                  'lib/assets/kendaraan/car.png',
-                  color: MyColors.redSoft,
-                  label: "Cars",
-                  onTap: () {
-                    Navigator.pushNamed(context, "/car");
-                  },
-                ),
-                IconCategories(
-                  'lib/assets/kendaraan/motor.png',
-                  color: MyColors.blueSoft,
-                  label: "Motors",
-                  onTap: () {
-                    Navigator.pushNamed(context, '/motors');
-                  },
-                ),
-                IconCategories(
-                  'lib/assets/kendaraan/bicycle.png',
-                  color: MyColors.blueSoft2,
-                  label: "Bicycles",
-                  onTap: () {
-                    Navigator.pushNamed(context, '/order');
-                  },
-                ),
-              ],
+            Consumer<OrderService>(
+              builder: (context, order, child) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconCategories(
+                    'lib/assets/kendaraan/car.png',
+                    color: MyColors.redSoft,
+                    label: "Cars",
+                    onTap: () {
+                      order.selectedVehicle = 'mobil';
+                      Navigator.pushNamed(context, "/order");
+                    },
+                  ),
+                  IconCategories(
+                    'lib/assets/kendaraan/motor.png',
+                    color: MyColors.blueSoft,
+                    label: "Motors",
+                    onTap: () {
+                      order.selectedVehicle = 'motor';
+                      Navigator.pushNamed(context, '/order');
+                    },
+                  ),
+                  IconCategories(
+                    'lib/assets/kendaraan/bicycle.png',
+                    color: MyColors.blueSoft2,
+                    label: "Bicycles",
+                    onTap: () {
+                      order.selectedVehicle = 'sepeda';
+                      Navigator.pushNamed(context, '/order');
+                    },
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 24,

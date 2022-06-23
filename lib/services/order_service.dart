@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class OrderService extends ChangeNotifier {
   int? selectedIndex;
-  String? selectedVehicle = 'mobil';
+
   List<Map<String, dynamic>> vehicle = [
     {'type': 'mobil', 'harga': 20000},
     {'type': 'motor', 'harga': 10000},
@@ -40,8 +40,8 @@ class OrderService extends ChangeNotifier {
     },
     {
       'id': 2,
-      'status': "selesai",
-      'vehicle': {'type': 'motor', 'harga': 10000, 'total': 1},
+      'status': "progress",
+      'vehicle': {'type': 'sepeda', 'harga': 5000, 'total': 1},
       'wash': {'type': 'full', 'harga': 10000},
       'add': [
         {'': 0}
@@ -50,36 +50,27 @@ class OrderService extends ChangeNotifier {
     {
       'id': 3,
       'status': "progress",
-      'vehicle': {'type': 'mobil', 'harga': 20000, 'total': 1},
+      'vehicle': {'type': 'motor', 'harga': 10000, 'total': 1},
       'wash': {'type': 'full', 'harga': 10000},
       'add': [
         {'': 0}
       ],
     },
-    {
-      'id': 4,
-      'status': "progress",
-      'vehicle': {'type': 'sepeda', 'harga': 5000, 'total': 1},
-      'wash': {'type': 'full', 'harga': 10000},
-      'add': [
-        {'': 0}
-      ],
-    }
   ];
 
   Map<String, dynamic> aTransaksi = {
     'id': 0,
-    'status': "",
-    'vehicle': {'type': '', 'harga': 0, 'total': 1},
-    'wash': {'type': 'full wash', 'harga': 10000},
+    'status': "progress",
+    'vehicle': {'type': '', 'harga': 0, 'total': 0},
+    'wash': {'type': 'full wash', 'harga': 0},
     'add': [
       {'': 0}
     ],
   };
 
-  void createTransaksi(Map<String, dynamic> oneTransaksi) {
-    oneTransaksi['id'] = transaksi.length + 1;
-    transaksi.add(oneTransaksi);
+  void createTransaksi() {
+    aTransaksi['id'] = transaksi.length + 1;
+    transaksi.add(aTransaksi);
     notifyListeners();
   }
 
@@ -112,47 +103,49 @@ class OrderService extends ChangeNotifier {
   void resetATransaksi() {
     aTransaksi = {
       'id': 0,
-      'status': "",
-      'vehicle': {'': 0, 'total': 0},
-      'wash': {'': 0},
+      'status': "progress",
+      'vehicle': {'type': '', 'harga': 0, 'total': 0},
+      'wash': {'type': 'full wash', 'harga': 0},
       'add': [
         {'': 0}
       ],
     };
     notifyListeners();
   }
+
+  int getHarga() {
+    return (aTransaksi['vehicle']['total'] * aTransaksi['vehicle']['harga'] +
+        aTransaksi['wash']['harga']);
+  }
+
+  String? selectedVehicle = 'mobil';
 }
 
-void main() {
-  OrderService order = OrderService();
 
-  order.createTransaksi({
-    'id': 1,
-    'status': "progress",
-    'vehicle': {'mobil': 20000},
-    'wash': {'full': 10000},
-    'add': [
-      {'': 0}
-    ],
-  });
-  order.createTransaksi({
-    'id': 1,
-    'status': "progress",
-    'vehicle': {'mobil': 20000, 'total': 2},
-    'wash': {'full': 10000},
-    'add': [
-      {'': 0}
-    ],
-  });
-  order.createTransaksi({
-    'id': 1,
-    'status': "progress",
-    'vehicle': {'mobil': 20000, 'total': 2},
-    'wash': {'full': 10000},
-    'add': [
-      {'': 0}
-    ],
-  });
-
-  print("HArga Mobil: ${order.transaksi[2]['vehicle']}");
-}
+// {
+//       'id': 2,
+//       'status': "selesai",
+//       'vehicle': {'type': 'motor', 'harga': 10000, 'total': 1},
+//       'wash': {'type': 'full', 'harga': 10000},
+//       'add': [
+//         {'': 0}
+//       ],
+//     },
+//     {
+//       'id': 3,
+//       'status': "progress",
+//       'vehicle': {'type': 'mobil', 'harga': 20000, 'total': 1},
+//       'wash': {'type': 'full', 'harga': 10000},
+//       'add': [
+//         {'': 0}
+//       ],
+//     },
+//     {
+//       'id': 4,
+//       'status': "progress",
+//       'vehicle': {'type': 'sepeda', 'harga': 5000, 'total': 1},
+//       'wash': {'type': 'full', 'harga': 10000},
+//       'add': [
+//         {'': 0}
+//       ],
+//     }
