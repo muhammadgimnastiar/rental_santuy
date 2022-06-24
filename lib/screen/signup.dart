@@ -1,27 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rental_santuy/auth.dart';
 import 'package:rental_santuy/data/keys.dart';
-import 'package:rental_santuy/screen/mainpage.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rental_santuy/data/dummy_data.dart';
 
-class Login extends StatefulWidget {
+class Signup extends StatefulWidget {
   static String nama = "", nim = "", username = "";
   final SharedPreferences sharedPrefs;
-  const Login(this.sharedPrefs, {Key? key}) : super(key: key);
+  const Signup(this.sharedPrefs, {Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginState extends State<Login> {
+class _SignupState extends State<Signup> {
   bool? isLogin;
   String? usernameData;
   String? namaData;
@@ -48,9 +45,9 @@ class _LoginState extends State<Login> {
       if (usernameInput == DummyData.data[i][Keys.username]) {
         if (passwordInput == DummyData.data[i]['password']) {
           saveToLocal(DummyData.data[i], true);
-          Login.nama = DummyData.data[i][Keys.nama];
-          Login.nim = DummyData.data[i][Keys.nim];
-          Login.username = DummyData.data[i][Keys.username];
+          Signup.nama = DummyData.data[i][Keys.nama];
+          Signup.nim = DummyData.data[i][Keys.nim];
+          Signup.username = DummyData.data[i][Keys.username];
 
           return isLogin = true;
         }
@@ -112,60 +109,20 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 32),
                 ButtonRent(
                   onTap: () {
-                    if (checkAccount(
-                        usernameController.text, passwordController.text)) {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => MainPage(widget.sharedPrefs),
-                          ));
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                                title: TextLarge("Salah"),
-                              ));
-                    }
-                  },
-                  text: "Continue with username",
-                  icon: Icon(
-                    Icons.sim_card,
-                    color: Colors.white,
-                  ),
-                  textColor: Colors.white,
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                ButtonRent(
-                  onTap: () {
-                    AuthenticationGoogle servicesGoogle =
-                        AuthenticationGoogle();
-                    servicesGoogle.signIn();
-                  },
-                  text: "Continue with Google",
-                  color: MyColors.whiteSoft,
-                  icon: FaIcon(FontAwesomeIcons.google),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
-                ButtonRent(
-                  onTap: () {
                     AuthenticationServices services =
                         AuthenticationServices(FirebaseAuth.instance);
                     services
-                        .signIn(
+                        .signUp(
                             email: usernameController.text.trim(),
                             password: passwordController.text.trim())
                         .then((result) {
                       if (result) {
                         saveToLocal({
-                          "id": 1,
+                          "id": 16,
                           "nama": usernameController.text.trim(),
                           "Nim": usernameController.text.trim(),
-                          "username": "user1",
-                          "password": "pass1",
+                          "username": "user16",
+                          "password": "pass16",
                         }, true);
                         Navigator.pushReplacementNamed(context, "/main");
                       } else {
@@ -175,26 +132,14 @@ class _LoginState extends State<Login> {
                       ;
                     });
                   },
-                  text: "Continue with email",
+                  text: "Daftar",
+                  textColor: MyColors.whiteSoft,
                   icon: Icon(
-                    Icons.mail_outlined,
+                    Icons.input_rounded,
+                    color: MyColors.whiteSoft,
                   ),
-                  color: MyColors.whiteSoft,
+                  color: MyColors.orangeSld,
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, "/signup");
-                  },
-                  child: TextMedium(
-                    "Don't have account yet?",
-                    fontSize: 14,
-                    color: MyColors.danger,
-                    decoration: TextDecoration.underline,
-                  ),
-                )
               ],
             ),
           ),

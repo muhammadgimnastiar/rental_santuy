@@ -10,16 +10,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/modal.dart';
 
-class Cars extends StatefulWidget {
+class Motors extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  Cars(this.sharedPrefs, {Key? key}) : super(key: key);
+  Motors(this.sharedPrefs, {Key? key}) : super(key: key);
   late CurrentUser user = CurrentUser(sharedPrefs);
 
   @override
-  State<Cars> createState() => _CarsState();
+  State<Motors> createState() => _MotorsState();
 }
 
-class _CarsState extends State<Cars> {
+class _MotorsState extends State<Motors> {
   String title = "Cars";
 
   @override
@@ -28,7 +28,7 @@ class _CarsState extends State<Cars> {
     super.initState();
   }
 
-  List<Map<String, dynamic>> carsList = vehicles.VehicleData.Cars;
+  List<Map<String, dynamic>> motorsList = vehicles.VehicleData.Motors;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,18 +71,17 @@ class _CarsState extends State<Cars> {
         child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: carsList.length,
+            itemCount: motorsList.length,
             itemBuilder: (context, index) {
               return CardRental(
-                carsList[index]['name'],
-                carsList[index]['price'],
+                motorsList[index]['name'],
+                motorsList[index]['price'],
                 widget.sharedPrefs,
-                uid: carsList[index]['uid'],
-                image: carsList[index]['image'],
-                color: carsList[index]['color'],
+                uid: motorsList[index]['uid'],
+                image: motorsList[index]['image'],
+                color: motorsList[index]['color'],
               );
             }),
-
       ),
     );
   }

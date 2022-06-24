@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_santuy/data/current_user.dart';
-import 'package:rental_santuy/data/vehicle_data.dart' as vehicles;
+import 'package:rental_santuy/data/vehicle_data.dart' as vehicle;
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/login.dart';
 import 'package:rental_santuy/style/colors.dart';
@@ -10,25 +10,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/modal.dart';
 
-class Cars extends StatefulWidget {
+class Bicycles extends StatefulWidget {
   final SharedPreferences sharedPrefs;
-  Cars(this.sharedPrefs, {Key? key}) : super(key: key);
+  Bicycles(this.sharedPrefs, {Key? key}) : super(key: key);
   late CurrentUser user = CurrentUser(sharedPrefs);
 
   @override
-  State<Cars> createState() => _CarsState();
+  State<Bicycles> createState() => _BicyclesState();
 }
 
-class _CarsState extends State<Cars> {
-  String title = "Cars";
+class _BicyclesState extends State<Bicycles> {
+  String title = "Bicycles";
 
   @override
   void initState() {
     widget.user.getDataFromLocal();
+
     super.initState();
   }
 
-  List<Map<String, dynamic>> carsList = vehicles.VehicleData.Cars;
+  List<Map<String, dynamic>> carsList = vehicle.VehicleData.Bicycles;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +83,6 @@ class _CarsState extends State<Cars> {
                 color: carsList[index]['color'],
               );
             }),
-
       ),
     );
   }

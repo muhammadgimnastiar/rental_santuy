@@ -23,4 +23,9 @@ class MyColors {
   static const Color orangeSld = Color(0xFFD7913F);
   static const Color greensSld = Color(0xFF60C1DC);
   static const Color cokelatSld = Color(0xFFB67853);
+
+  static const Color redSoft = Color(0xFFFFC8CD);
+  static const Color blueSoft = Color(0xFFCBE8FF);
+  static const Color blueSoft2 = Color(0xFFB1D2E2);
+  static const Color whiteSoft = Color(0xFFF0F5F7);
 }
