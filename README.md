@@ -1,11 +1,11 @@
-# rental_santuy
+# car_rental_flutter_santuy
 
 A new Flutter project.
 
-# Rijix Shoes Laundy App with flutter
+# Car Rental App with flutter
 
 ## Deskripsi
-Rijix Shoes Laundry adalah bisnis yang bergerak jasa perantara rental mobil secara online lewat aplikasi berbasis mobile.
+Car rental Flutter adalah bisnis yang bergerak jasa perantara rental mobil secara online lewat aplikasi berbasis mobile.
 
 
 ## Features
