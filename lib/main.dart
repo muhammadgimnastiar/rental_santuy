@@ -17,6 +17,7 @@ import 'package:rental_santuy/screen/motors.dart';
 import 'package:rental_santuy/screen/signup.dart';
 import 'package:rental_santuy/screen/transaksi_detail.dart';
 import 'package:rental_santuy/screen/transaksi_history.dart';
+import 'package:rental_santuy/services/articles.dart';
 import 'package:rental_santuy/services/order_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -113,25 +114,28 @@ class _MyAppState extends State<MyApp> {
 
     return ChangeNotifierProvider<OrderService>(
       create: (context) => OrderService(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Rental',
-        initialRoute: isLogin == false
-            ? (_user == null)
-                ? '/'
-                : '/main'
-            : '/main',
-        routes: {
-          "/": (context) => Login(widget.sharedPrefs),
-          "/car": (context) => Cars(widget.sharedPrefs),
-          "/main": (context) => MainPage(widget.sharedPrefs),
-          "/motors": (context) => Motors(widget.sharedPrefs),
-          "/bicycles": (context) => Bicycles(widget.sharedPrefs),
-          "/signup": (context) => Signup(widget.sharedPrefs),
-          "/order": (context) => const Order(),
-          "/transasksi": (context) => const TransasksiHistory(),
-          '/transasksidetail': (context) => const DetailTransaksi(),
-        },
+      child: ChangeNotifierProvider<Articles>(
+        create: (context) => Articles(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Rental',
+          initialRoute: isLogin == false
+              ? (_user == null)
+                  ? '/'
+                  : '/main'
+              : '/main',
+          routes: {
+            "/": (context) => Login(widget.sharedPrefs),
+            "/car": (context) => Cars(widget.sharedPrefs),
+            "/main": (context) => MainPage(widget.sharedPrefs),
+            "/motors": (context) => Motors(widget.sharedPrefs),
+            "/bicycles": (context) => Bicycles(widget.sharedPrefs),
+            "/signup": (context) => Signup(widget.sharedPrefs),
+            "/order": (context) => const Order(),
+            "/transasksi": (context) => const TransasksiHistory(),
+            '/transasksidetail': (context) => const DetailTransaksi(),
+          },
+        ),
       ),
     );
   }
