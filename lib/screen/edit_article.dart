@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_santuy/services/articles.dart';
+import 'package:rental_santuy/style/colors.dart';
 
-class EditProductPage extends StatelessWidget {
-  static const route = "/edit-product";
+class EditArticlePage extends StatelessWidget {
+  static const route = "/edit-article";
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,19 @@ class EditProductPage extends StatelessWidget {
         TextEditingController(text: selectedProduct.content);
 
     void edit(String title, String image, String content) {
-      prov.editArticle(prodId, title, image, content);
+      try {
+        prov.editArticle(prodId, title, image, content);
+      } catch (e) {
+        if (e == 401) {
+          Navigator.pushNamed(context, '/login');
+        }
+      }
       Navigator.pop(context);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Product"),
+        title: Text("Edit Article"),
         actions: [
           IconButton(
             icon: Icon(Icons.save),
@@ -35,6 +42,7 @@ class EditProductPage extends StatelessWidget {
                 contentController.text),
           ),
         ],
+        backgroundColor: MyColors.orangeSld,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -49,7 +57,7 @@ class EditProductPage extends StatelessWidget {
                   controller: titleController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    labelText: "Product Name",
+                    labelText: "Title",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -96,11 +104,11 @@ class EditProductPage extends StatelessWidget {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    primary: MyColors.orangeSld),
               ),
             ),
           ],

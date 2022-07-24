@@ -3,14 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_santuy/auth.dart';
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/screen/mainpage.dart';
+import 'package:rental_santuy/services/articles.dart';
 import 'package:rental_santuy/style/colors.dart';
 import 'package:rental_santuy/style/text.dart';
 import 'package:rental_santuy/widget/button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rental_santuy/data/dummy_data.dart';
+
+import 'home_api.dart';
 
 class Login extends StatefulWidget {
   static String nama = "", nim = "", username = "";
@@ -137,15 +141,25 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: 24,
                 ),
-                ButtonRent(
-                  onTap: () {
-                    AuthenticationGoogle servicesGoogle =
-                        AuthenticationGoogle();
-                    servicesGoogle.signIn();
-                  },
-                  text: "Continue with Google",
-                  color: MyColors.whiteSoft,
-                  icon: FaIcon(FontAwesomeIcons.google),
+                Consumer<Articles>(
+                  builder: (context, article, child) => ButtonRent(
+                    onTap: () async {
+                      if (await article.login(
+                          usernameController.text, passwordController.text)) {
+                        Navigator.pushNamed(context, HomeAPI.route);
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                  title: TextLarge(
+                                      "Authentication failed, please login again"),
+                                ));
+                      }
+                    },
+                    text: "Continue with Laravel account",
+                    color: MyColors.whiteSoft,
+                    icon: FaIcon(FontAwesomeIcons.google),
+                  ),
                 ),
                 SizedBox(
                   height: 24,

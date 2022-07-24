@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../services/articles.dart';
 
-class AddProductPage extends StatelessWidget {
-  static const route = "/add-product";
+class AddArticlePage extends StatelessWidget {
+  static const route = "/add-article";
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController imageController = TextEditingController();
@@ -95,8 +95,11 @@ class AddProductPage extends StatelessWidget {
               width: double.infinity,
               margin: EdgeInsets.only(bottom: 30),
               child: ElevatedButton(
-                onPressed: () => save(titleController.text,
-                    imageController.text, contentController.text),
+                onPressed: () {
+                  save(titleController.text, imageController.text,
+                      contentController.text);
+                  Navigator.pop(context);
+                },
                 child: Text(
                   "Save",
                   style: TextStyle(

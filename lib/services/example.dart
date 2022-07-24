@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 
 import '../models/article.dart';
 
-class Articles extends ChangeNotifier {
-  String urlMaster = "http://10.0.2.2:8000";
+class Shazam extends ChangeNotifier {
+  String urlMaster = "https://shazam.p.rapidapi.com";
 
   String? token;
 
@@ -16,12 +16,13 @@ class Articles extends ChangeNotifier {
   List<Article> get allArticle => _allArticle;
 
   Future<void> inisialData() async {
-    Uri url = Uri.parse("$urlMaster/api/v1/berita/");
-    print(token);
+    Uri url = Uri.parse(
+        "$urlMaster/search?term=kiss%20the%20rain&locale=en-US&offset=0&limit=5");
+
     try {
       var response = await http.get(url, headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader: "Bearer $token"
+        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+        "X-RapidAPI-Key": "85bc380d08msh95043470059f09bp1f4cd6jsnf2da777d5503"
       });
 
       List<dynamic> dataArticles;
@@ -29,17 +30,8 @@ class Articles extends ChangeNotifier {
         throw (response.statusCode);
       } else {
         var data = json.decode(response.body) as Map<String, dynamic>;
+        print(data);
 
-        _allArticle.clear();
-        dataArticles = data["data"];
-        for (int i = 0; i < dataArticles.length; i++) {
-          Article article = Article(
-              id: dataArticles[i]["id"].toString(),
-              title: dataArticles[i]["judul"],
-              image: dataArticles[i]["picture"],
-              content: dataArticles[i]["content"]);
-          _allArticle.add(article);
-        }
         notifyListeners();
       }
     } catch (err) {
@@ -177,19 +169,17 @@ class Articles extends ChangeNotifier {
 //Future<void> addArticle()
 
 Future<void> main(List<String> args) async {
-  Articles article = Articles();
-
-  await article.login("adagimnas@gmail.com", "Gimnasada3*");
-
+  Shazam article = Shazam();
+  print("Running");
   article.inisialData();
-  article.addArticle(
-      "ini Title dari method add article",
-      "https://img-global.cpcdn.com/recipes/a6f3bd2872e44815/1200x630cq70/photo.jpg",
-      "Content brooo");
+  // article.addArticle(
+  //     "ini Title dari method add article",
+  //     "https://img-global.cpcdn.com/recipes/a6f3bd2872e44815/1200x630cq70/photo.jpg",
+  //     "Content brooo");
 
-  article.editArticle(
-      '7',
-      "ini Title dari method EDIT article",
-      "https://img-global.cpcdn.com/recipes/a6f3bd2872e44815/1200x630cq70/photo.jpg",
-      "Content brooo");
+  // article.editArticle(
+  //     '7',
+  //     "ini Title dari method EDIT article",
+  //     "https://img-global.cpcdn.com/recipes/a6f3bd2872e44815/1200x630cq70/photo.jpg",
+  //     "Content brooo");
 }

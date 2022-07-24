@@ -9,8 +9,11 @@ import 'package:provider/provider.dart';
 import 'package:rental_santuy/data/current_user.dart';
 import 'package:rental_santuy/data/keys.dart';
 import 'package:rental_santuy/firebase_options.dart';
+import 'package:rental_santuy/screen/add_article.dart';
 import 'package:rental_santuy/screen/bicycles.dart';
 import 'package:rental_santuy/screen/cars.dart';
+import 'package:rental_santuy/screen/edit_article.dart';
+import 'package:rental_santuy/screen/home_api.dart';
 import 'package:rental_santuy/screen/login.dart';
 import 'package:rental_santuy/screen/mainpage.dart';
 import 'package:rental_santuy/screen/motors.dart';
@@ -134,6 +137,9 @@ class _MyAppState extends State<MyApp> {
             "/order": (context) => const Order(),
             "/transasksi": (context) => const TransasksiHistory(),
             '/transasksidetail': (context) => const DetailTransaksi(),
+            '/home-api': (context) => HomeAPI(),
+            '/edit-article': (context) => EditArticlePage(),
+            '/add-article': (context) => AddArticlePage(),
           },
         ),
       ),
